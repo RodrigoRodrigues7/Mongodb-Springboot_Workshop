@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.rodrigo.mongodbworkshop.domain.Post;
 import com.rodrigo.mongodbworkshop.domain.User;
 import com.rodrigo.mongodbworkshop.dto.AuthorDTO;
+import com.rodrigo.mongodbworkshop.dto.CommentDTO;
 import com.rodrigo.mongodbworkshop.repository.PostRepository;
 import com.rodrigo.mongodbworkshop.repository.UserRepository;
 
@@ -40,6 +41,13 @@ public class Instatiation implements CommandLineRunner{
 		
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem!", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
 		Post post2 = new Post(null, sdf.parse("15/02/2019"), "Bom Dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+		
+		CommentDTO comment1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+		CommentDTO comment2 = new CommentDTO("Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(bob));
+		CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("15/03/2018"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(comment1, comment2));
+		post2.getComments().addAll(Arrays.asList(comment3));
 		
 		postRepo.saveAll(Arrays.asList(post1, post2));
 		
