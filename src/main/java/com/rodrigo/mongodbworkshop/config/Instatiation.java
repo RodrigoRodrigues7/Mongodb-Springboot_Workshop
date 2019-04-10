@@ -25,7 +25,7 @@ public class Instatiation implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
@@ -42,6 +42,9 @@ public class Instatiation implements CommandLineRunner{
 		Post post2 = new Post(null, sdf.parse("15/02/2019"), "Bom Dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 		
 		postRepo.saveAll(Arrays.asList(post1, post2));
+		
+		maria.getPosts().addAll(Arrays.asList(post1, post2));
+		userRepo.save(maria);
 	}
 	
 	
