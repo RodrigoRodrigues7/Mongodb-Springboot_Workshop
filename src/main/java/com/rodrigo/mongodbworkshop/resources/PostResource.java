@@ -16,6 +16,9 @@ import com.rodrigo.mongodbworkshop.domain.Post;
 import com.rodrigo.mongodbworkshop.resources.util.URL;
 import com.rodrigo.mongodbworkshop.services.PostService;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value = "/posts")
 public class PostResource {
@@ -50,6 +53,10 @@ public class PostResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	// Essa 'annotation' do 'swagger' serve para dar mensagens à respostas específicas
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Non-existent Code") })
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		service.delete(id);
